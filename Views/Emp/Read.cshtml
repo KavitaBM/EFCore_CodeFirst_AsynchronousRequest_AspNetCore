@@ -1,0 +1,33 @@
+
+
+@model IEnumerable<EFCore_CodeFirst_AsynchronousRequest_AspNetCore.Models.EmpModel>
+<p><a asp-action="Create">Create New</a></p>
+<table border="1">
+    <tr>
+        <th>CustID</th>
+        <th>CustName</th>
+        <th>CustCity</th>
+        <th>CustAddress</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.Id)</td>
+            <td>@Html.DisplayFor(m => item.Name)</td>
+            <td>@Html.DisplayFor(m => item.City)</td>
+            <td>@Html.DisplayFor(m => item.Address)</td>
+            <td>
+                @Html.ActionLink("Update", "Update", new { id = item.Id})|
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id },
+                new { onclick = "return confirm('Are you sure wants to delete?');" })
+        </td>
+    </tr>
+        }
+</table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
